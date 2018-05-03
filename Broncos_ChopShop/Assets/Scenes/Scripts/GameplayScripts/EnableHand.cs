@@ -17,9 +17,9 @@ public class EnableHand : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		Lifes.Add(GameObject.Find("life_3"));
-		Lifes.Add(GameObject.Find("life_2"));
-		Lifes.Add(GameObject.Find("life_1"));
+		Lifes.Add(GameObject.Find("Canvas/UI_Life_1"));
+		Lifes.Add(GameObject.Find("Canvas/UI_Life_2"));
+		Lifes.Add(GameObject.Find("Canvas/UI_Life_3"));
 	}
 	
 	// Update is called once per frame
@@ -33,7 +33,11 @@ public class EnableHand : MonoBehaviour {
 
     void OnTriggerExit2D (Collider2D other)
     {
-		handsInside.Remove(other.gameObject);
+        handsInside.Remove(other.gameObject);
+        if (other.gameObject.tag != "UsedHand")
+        {
+            oneLifeLess();
+        }
     }
 
     public void Pass()
@@ -49,6 +53,7 @@ public class EnableHand : MonoBehaviour {
 			else
 			{
 				Debug.Log("Incorrecto");
+                handsInside[i].tag = "UsedHand";
 				oneLifeLess();
 			}
     	}
@@ -63,17 +68,16 @@ public class EnableHand : MonoBehaviour {
     			int i = handsInside.Count - 1;
     			if (handsInside[i].tag != "GoodHand")
     			{
-    				Debug.Log("Incorrecto");
+                    handsInside[i].tag = "UsedHand";
     				oneLifeLess();
     			}
-
     			else
     			{
-    				
     				validPlay(i);
     			}
     	}
     }
+
 
     void validPlay(int i)
     {
@@ -81,6 +85,7 @@ public class EnableHand : MonoBehaviour {
 		handsInside[i].GetComponent<SpriteRenderer>().enabled = false;
 		score ++;
 		UI_Score.GetComponent<UnityEngine.UI.Text>().text = score.ToString();
+        handsInside[i].tag = "UsedHand";
     }
     void oneLifeLess()
     {
@@ -88,7 +93,7 @@ public class EnableHand : MonoBehaviour {
     	{
     		//Changes sprite of life
 	    	int last = Lifes.Count - 1;
-			Lifes[last].GetComponent<SpriteRenderer>().sprite = LifeDisabled;
+			Lifes[last].GetComponent<Image>().sprite = LifeDisabled;
 			Lifes.Remove(Lifes[last]);
     	}
     	else
