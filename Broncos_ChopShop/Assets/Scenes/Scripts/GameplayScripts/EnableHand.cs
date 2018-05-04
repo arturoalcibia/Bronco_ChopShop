@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[RequireComponent (typeof(AudioSource))]
+
 public class EnableHand : MonoBehaviour {
 
 	public List<GameObject> handsInside = new List<GameObject>();
@@ -18,8 +20,11 @@ public class EnableHand : MonoBehaviour {
     GameObject handClone;
     Vector3 startCoords = new Vector3(800, 0, 0);
 	List<GameObject> Lifes = new List<GameObject>();
-	// Use this for initialization
-	void Start () 
+
+    [SerializeField] AudioClip goodSound, badSound;
+    AudioSource audioSource;
+    // Use this for initialization
+    void Start () 
 	{
 		Lifes.Add(GameObject.Find("Canvas/UI_Life_1"));
 		Lifes.Add(GameObject.Find("Canvas/UI_Life_2"));
@@ -27,11 +32,11 @@ public class EnableHand : MonoBehaviour {
 
         //Start spawning hands
         StartCoroutine(spawnHand());
-	}
+        audioSource = GetComponent<AudioSource>();
+    }
 	
 	// Update is called once per frame
-	void Update () {
-	}
+	void Update () {}
 
     void OnTriggerEnter2D (Collider2D other)
     {
@@ -47,7 +52,18 @@ public class EnableHand : MonoBehaviour {
         if (other.gameObject.tag != "UsedHand")
         {
             oneLifeLess();
+            PlayAudioEffect(badSound);
         }
+    }
+
+
+    void PlayAudioEffect(AudioClip audioClip_)
+    {
+        float audioFx = PlayerPrefs.GetFloat("VolumenEffects");
+        if (PlayerPrefs.GetInt("MuteEffects") == 1)
+            audioFx = 0.0f;
+
+        audioSource.PlayOneShot(audioClip_, audioFx);
     }
 
     public void Pass()
@@ -57,15 +73,16 @@ public class EnableHand : MonoBehaviour {
     		int i = handsInside.Count - 1;
 			if (handsInside[i].tag == "BadHand")
 			{
-				
 				validPlay(i);
-			}
+                PlayAudioEffect(goodSound);
+            }
 			else
 			{
 				Debug.Log("Incorrecto");
                 handsInside[i].tag = "UsedHand";
 				oneLifeLess();
-			}
+                PlayAudioEffect(badSound);
+            }
     	}
     }
 
@@ -80,11 +97,13 @@ public class EnableHand : MonoBehaviour {
     			{
                     handsInside[i].tag = "UsedHand";
     				oneLifeLess();
-    			}
+                    PlayAudioEffect(badSound);
+                }
     			else
     			{
     				validPlay(i);
-    			}
+                    PlayAudioEffect(goodSound);
+                }
     	}
     }
 
@@ -118,13 +137,11 @@ public class EnableHand : MonoBehaviour {
     {
         while(true)
         {
-
             int prefab = Random.Range(0, 2);
             handClone= (GameObject)Instantiate(listPrefabs[prefab], startCoords, Quaternion.Euler(0, 0, 0));
             yield return new WaitForSeconds(2f);
             handClone.name = "hand" + handCount;
             handCount ++;
-
         }
     }
 }
