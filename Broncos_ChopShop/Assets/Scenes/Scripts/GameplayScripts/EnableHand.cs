@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -120,9 +120,9 @@ public class EnableHand : MonoBehaviour {
         {
 
             int prefab = Random.Range(0, 2);
-            startCoords = (GameObject)Instantiate(listPrefabs[prefab], startCoords, Quaternion.Euler(0, 0, 0));
+            handClone= (GameObject)Instantiate(listPrefabs[prefab], startCoords, Quaternion.Euler(0, 0, 0));
             yield return new WaitForSeconds(2f);
-            track.name = "hand" + handCount;
+            handClone.name = "hand" + handCount;
             handCount ++;
 
         }
