@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour {
 
 	void Start () 
 	{
-		StartCoroutine(spawnHand());
+		//StartCoroutine(spawnHand());
 	}
 	
 	IEnumerator spawnHand()

@@ -723,7 +723,11 @@ MonoBehaviour:
   score: 0
   LifeEnabled: {fileID: 21300000, guid: 6b0af9df7a4672d44bf33f112604e22e, type: 3}
   LifeDisabled: {fileID: 21300000, guid: 60cecf51b60617b4fb6674e86c73ad77, type: 3}
-  Lifes: []
+  time: 0
+  listPrefabs:
+  - {fileID: 1622506482071038, guid: 74d918d9c96b3414ca06f68aa59b5267, type: 2}
+  - {fileID: 1150753979884954, guid: 7cc8de8f26ccdb7458cf9db2e04a9bb3, type: 2}
+  handCount: 0
 --- !u!61 &1275033406
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -796,7 +800,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -92.04001, y: 63.48401}
+  m_AnchoredPosition: {x: -92.04001, y: 63.483887}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1415888292

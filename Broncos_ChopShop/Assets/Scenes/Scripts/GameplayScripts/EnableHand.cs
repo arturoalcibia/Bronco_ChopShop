@@ -13,13 +13,20 @@ public class EnableHand : MonoBehaviour {
 	public Sprite LifeEnabled;
 	public Sprite LifeDisabled;
 
-	public List<GameObject> Lifes = new List<GameObject>();
+    public GameObject[] listPrefabs;
+    public int handCount = 0;
+    GameObject handClone;
+    Vector3 startCoords = new Vector3(800, 0, 0);
+	List<GameObject> Lifes = new List<GameObject>();
 	// Use this for initialization
 	void Start () 
 	{
 		Lifes.Add(GameObject.Find("Canvas/UI_Life_1"));
 		Lifes.Add(GameObject.Find("Canvas/UI_Life_2"));
 		Lifes.Add(GameObject.Find("Canvas/UI_Life_3"));
+
+        //Start spawning hands
+        StartCoroutine(spawnHand());
 	}
 	
 	// Update is called once per frame
@@ -28,12 +35,15 @@ public class EnableHand : MonoBehaviour {
 
     void OnTriggerEnter2D (Collider2D other)
     {
+        //Current hand
 		handsInside.Add(other.gameObject);
     }
 
     void OnTriggerExit2D (Collider2D other)
     {
+        //Once the hand is outside the valid area to decide whether to slice or pass
         handsInside.Remove(other.gameObject);
+
         if (other.gameObject.tag != "UsedHand")
         {
             oneLifeLess();
@@ -83,7 +93,7 @@ public class EnableHand : MonoBehaviour {
     {
     	//Dissapears Sprite Renderer and updates Score
 		handsInside[i].GetComponent<SpriteRenderer>().enabled = false;
-		score ++;
+		score += 10;
 		UI_Score.GetComponent<UnityEngine.UI.Text>().text = score.ToString();
         handsInside[i].tag = "UsedHand";
     }
@@ -102,6 +112,20 @@ public class EnableHand : MonoBehaviour {
             PlayerPrefs.SetInt("Score", score);
             SceneManager.LoadScene("0124_Gam_Retry");
     	}
+    }
+
+    IEnumerator spawnHand()
+    {
+        while(true)
+        {
+
+            int prefab = Random.Range(0, 2);
+            startCoords = (GameObject)Instantiate(listPrefabs[prefab], startCoords, Quaternion.Euler(0, 0, 0));
+            yield return new WaitForSeconds(2f);
+            track.name = "hand" + handCount;
+            handCount ++;
+
+        }
     }
 }
 
