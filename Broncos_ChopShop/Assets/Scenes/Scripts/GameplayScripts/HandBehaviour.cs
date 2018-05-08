@@ -12,7 +12,13 @@ public class HandBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		transform.position = new Vector3(transform.position.x + (moveSpeed * -1), transform.position.y);
-		
+        float mvSped = moveSpeed * -1;
+
+        float inc = PlayerPrefs.GetFloat("VelocityIncrement") *
+            (float)PlayerPrefs.GetInt("CurrentVelocity");
+
+        mvSped -= inc;
+
+		transform.position = new Vector3(transform.position.x + mvSped, transform.position.y);
 	}
 }

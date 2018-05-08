@@ -13,13 +13,13 @@ public class GameOptionsCtrl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         audioSource = GetComponent<AudioSource>();
-        float musicVolume = PlayerPrefs.GetFloat("VolumeMusic");
+        float musicVolume = PlayerPrefs.GetFloat("VolumenMusic");
 
-        /*
+        
         if (PlayerPrefs.GetInt("MuteMusic") == 1)
             musicVolume = 0.0f;
-        */
-        audioSource.PlayOneShot(soundtrack, 1.0f);
+        
+        audioSource.PlayOneShot(soundtrack, musicVolume);
         }
 	
 	// Update is called once per frame

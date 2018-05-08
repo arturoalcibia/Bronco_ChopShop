@@ -21,18 +21,13 @@ public class Spawner : MonoBehaviour {
 	{
 		while(true)
 		{
-
 			int prefab = Random.Range(0, 2);
 			track = (GameObject)Instantiate(listPrefabs[prefab], positionPrefabs[0].transform.position, Quaternion.Euler(0, 0, 0));
 			yield return new WaitForSeconds(2f);
 			track.name = "hand" + handCount;
 			handCount ++;
-
 		}
 	}
 
-	void Update () {
-		
-		
-	}
+	void Update () {}
 }

@@ -8,21 +8,27 @@ using UnityEngine.SceneManagement;
 
 public class EnableHand : MonoBehaviour {
 
-	public List<GameObject> handsInside = new List<GameObject>();
-	public Text UI_Score;
-	public int score = 0;
+    [SerializeField] List<GameObject> handsInside = new List<GameObject>();
+    [SerializeField] Text UI_Score;
+    int score = 0;
 
-	public Sprite LifeEnabled;
-	public Sprite LifeDisabled;
+    [SerializeField] Sprite LifeEnabled;
+    [SerializeField] Sprite LifeDisabled;
 
-    public GameObject[] listPrefabs;
-    public int handCount = 0;
+    [SerializeField] GameObject[] listPrefabs;
+    int handCount = 0;
     GameObject handClone;
     Vector3 startCoords = new Vector3(800, 0, 0);
 	List<GameObject> Lifes = new List<GameObject>();
 
     [SerializeField] AudioClip goodSound, badSound;
     AudioSource audioSource;
+
+    // Control of game 
+    [SerializeField] float velocityIncrement = 2.0f;
+    [SerializeField] int velocities = 5;
+    [SerializeField] int scoreSteps = 60;
+    int currentVelocity = 0;
     // Use this for initialization
     void Start () 
 	{
@@ -33,10 +39,38 @@ public class EnableHand : MonoBehaviour {
         //Start spawning hands
         StartCoroutine(spawnHand());
         audioSource = GetComponent<AudioSource>();
+
+        PlayerPrefs.SetFloat("VelocityIncrement", velocityIncrement);
+        PlayerPrefs.SetInt("CurrentVelocity", currentVelocity);
     }
 	
 	// Update is called once per frame
-	void Update () {}
+	void Update () {
+
+        bool downK = false;
+        bool upK = false;
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !upK)
+        {
+            // PASS
+            Pass();
+            upK = true;
+        }
+
+        
+        if (Input.GetKeyDown(KeyCode.DownArrow) && !downK)
+        {
+            // SLICE
+            Slice();
+            downK = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+            upK = true;
+
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+            downK = true;
+    }
 
     void OnTriggerEnter2D (Collider2D other)
     {
@@ -115,6 +149,12 @@ public class EnableHand : MonoBehaviour {
 		score += 10;
 		UI_Score.GetComponent<UnityEngine.UI.Text>().text = score.ToString();
         handsInside[i].tag = "UsedHand";
+
+        if (currentVelocity < velocities)
+        {
+            currentVelocity = score / scoreSteps;
+            PlayerPrefs.SetInt("CurrentVelocity", currentVelocity);
+        }  
     }
     void oneLifeLess()
     {
@@ -139,7 +179,14 @@ public class EnableHand : MonoBehaviour {
         {
             int prefab = Random.Range(0, 2);
             handClone= (GameObject)Instantiate(listPrefabs[prefab], startCoords, Quaternion.Euler(0, 0, 0));
-            yield return new WaitForSeconds(2f);
+            float timeWait = 2.0f;
+
+            float customTime = timeWait - (timeWait * ((float)currentVelocity/(float)velocities) );
+
+            if (customTime != 0)
+                yield return new WaitForSeconds(customTime);
+            else
+                yield return null;
             handClone.name = "hand" + handCount;
             handCount ++;
         }
