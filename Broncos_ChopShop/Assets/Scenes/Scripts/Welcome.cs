@@ -12,13 +12,13 @@ public class Welcome : MonoBehaviour {
             PlayerPrefs.SetInt("Score", 0);
 
         if (!PlayerPrefs.HasKey("VolumenMusic"))
-            PlayerPrefs.SetFloat("VolumenMusic", 50.0f);
+            PlayerPrefs.SetFloat("VolumenMusic", 0.50f);
 
         if (!PlayerPrefs.HasKey("MuteMusic"))
             PlayerPrefs.SetInt("MuteMusic", 0);
 
         if (!PlayerPrefs.HasKey("VolumenEffects"))
-            PlayerPrefs.SetFloat("VolumenMusic", 50.0f);
+            PlayerPrefs.SetFloat("VolumenMusic", 0.50f);
 
         if (!PlayerPrefs.HasKey("MuteEffects"))
             PlayerPrefs.SetInt("MuteMusic", 0);
@@ -26,7 +26,11 @@ public class Welcome : MonoBehaviour {
         if (!PlayerPrefs.HasKey("KidMode"))
             PlayerPrefs.SetInt("KidMode", 0);
 
-
+        float musicVolume = PlayerPrefs.GetFloat("VolumenMusic");
+        if (PlayerPrefs.GetInt("MuteMusic") == 1)
+            musicVolume = 0.0f;
+        GameObject AudioObject = GameObject.FindGameObjectWithTag("BgMusic");
+        AudioObject.GetComponent<AudioSource>().volume = musicVolume;
     }
 	
 	// Update is called once per frame

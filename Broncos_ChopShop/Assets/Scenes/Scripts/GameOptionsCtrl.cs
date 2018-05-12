@@ -5,22 +5,31 @@ using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(AudioSource))]
+
 public class GameOptionsCtrl : MonoBehaviour {
 
     AudioSource audioSource;
     [SerializeField] AudioClip soundtrack;
+    [SerializeField] AudioClip fxAudio;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        GameObject[] oldMusic = GameObject.FindGameObjectsWithTag("BgMusic");
+        if (oldMusic.Length != 0)
+            for (int i = 0; i < oldMusic.Length; i++) Destroy(oldMusic[i]);
+    }
+
+    // Use this for initialization
+    void Start ()
+    {
         audioSource = GetComponent<AudioSource>();
         float musicVolume = PlayerPrefs.GetFloat("VolumenMusic");
-
-        
+    
         if (PlayerPrefs.GetInt("MuteMusic") == 1)
             musicVolume = 0.0f;
-        
+
         audioSource.PlayOneShot(soundtrack, musicVolume);
-        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -41,4 +50,14 @@ public class GameOptionsCtrl : MonoBehaviour {
     {
         SceneManager.LoadScene("0100_Welcome");
     }
+
+    public void BtnButtonSound()
+    {
+        float audioFx = PlayerPrefs.GetFloat("VolumenEffects");
+        if (PlayerPrefs.GetInt("MuteEffects") == 1)
+            audioFx = 0.0f;
+
+        audioSource.PlayOneShot(fxAudio, audioFx);
+    }
+
 }

@@ -7,6 +7,7 @@ TagManager:
   - GoodHand
   - BadHand
   - UsedHand
+  - BgMusic
   layers:
   - Default
   - TransparentFX

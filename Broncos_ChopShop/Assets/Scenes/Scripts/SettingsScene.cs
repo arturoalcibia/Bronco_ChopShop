@@ -7,8 +7,15 @@ public class SettingsScene : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        float musicVolume = PlayerPrefs.GetFloat("VolumenMusic");
+        if (PlayerPrefs.GetInt("MuteMusic") == 1)
+            musicVolume = 0.0f;
+
+        GameObject[] AudioObject = GameObject.FindGameObjectsWithTag("BgMusic");
+        if (AudioObject.Length != 0)
+            for (int i = 0; i < AudioObject.Length; i++)
+                AudioObject[i].GetComponent<AudioSource>().volume = musicVolume;
+    }
 	
 	// Update is called once per frame
 	void Update () {

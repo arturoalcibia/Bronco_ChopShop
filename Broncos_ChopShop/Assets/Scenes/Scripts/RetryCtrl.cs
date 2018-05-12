@@ -12,12 +12,20 @@ public class RetryCtrl : MonoBehaviour {
     [SerializeField] int limitScores;
 
     public Transform canvas_transform;
-	// Use this for initialization
-	void Start () 
+    
+    // Use this for initialization
+    void Start () 
     {
         scoreText.text = PlayerPrefs.GetInt("Score").ToString();
         IsScoreHigher(scoreText.text + "|NaN");
 
+        AudioSource audioConfig = this.gameObject.GetComponent<AudioSource>();
+        float musicVol = 1.0f;
+
+        musicVol = PlayerPrefs.GetFloat("VolumenMusic");
+        if (PlayerPrefs.GetInt("MuteMusic") == 1)
+            musicVol = 0.0f;
+        audioConfig.volume = musicVol;
 
 	}
 	
