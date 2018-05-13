@@ -18,10 +18,10 @@ public class Welcome : MonoBehaviour {
             PlayerPrefs.SetInt("MuteMusic", 0);
 
         if (!PlayerPrefs.HasKey("VolumenEffects"))
-            PlayerPrefs.SetFloat("VolumenMusic", 0.50f);
+            PlayerPrefs.SetFloat("VolumenEffects", 0.50f);
 
         if (!PlayerPrefs.HasKey("MuteEffects"))
-            PlayerPrefs.SetInt("MuteMusic", 0);
+            PlayerPrefs.SetInt("MuteEffects", 0);
 
         if (!PlayerPrefs.HasKey("KidMode"))
             PlayerPrefs.SetInt("KidMode", 0);
