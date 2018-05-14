@@ -18,7 +18,7 @@ public class EnableHand : MonoBehaviour {
     [SerializeField] GameObject[] listPrefabs;
     int handCount = 0;
     GameObject handClone;
-    Vector3 startCoords = new Vector3(800, 0, 0);
+    Vector3 startCoords = new Vector3(1500, 0, 0);
 	List<GameObject> Lifes = new List<GameObject>();
 
     [SerializeField] AudioClip goodSound, badSound;
@@ -162,7 +162,7 @@ public class EnableHand : MonoBehaviour {
     	{
     		//Changes sprite of life
 	    	int last = Lifes.Count - 1;
-			Lifes[last].GetComponent<Image>().sprite = LifeDisabled;
+			Lifes[last].GetComponent<Image>().enabled = false;
 			Lifes.Remove(Lifes[last]);
     	}
     	else
