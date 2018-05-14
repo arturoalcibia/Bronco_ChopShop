@@ -10,6 +10,7 @@ public class EnableHand : MonoBehaviour {
 
     [SerializeField] List<GameObject> handsInside = new List<GameObject>();
     [SerializeField] Text UI_Score;
+    [SerializeField] GameObject hacha;
     int score = 0;
 
     [SerializeField] Sprite LifeEnabled;
@@ -124,6 +125,7 @@ public class EnableHand : MonoBehaviour {
 
     public void Slice()
     {
+        hacha.GetComponent<Animator>().SetBool("slice", true);
     	if (handsInside.Count > 0)
     	{	
     			int i = handsInside.Count - 1;
@@ -145,7 +147,7 @@ public class EnableHand : MonoBehaviour {
     void validPlay(int i)
     {
     	//Dissapears Sprite Renderer and updates Score
-		handsInside[i].GetComponent<SpriteRenderer>().enabled = false;
+		//handsInside[i].GetComponent<SpriteRenderer>().enabled = false;
 		score += 10;
 		UI_Score.GetComponent<UnityEngine.UI.Text>().text = score.ToString();
         handsInside[i].tag = "UsedHand";
