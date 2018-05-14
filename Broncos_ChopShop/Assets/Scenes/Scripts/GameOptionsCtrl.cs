@@ -23,6 +23,8 @@ public class GameOptionsCtrl : MonoBehaviour {
     void Start ()
     {
         audioSource = GetComponent<AudioSource>();
+        //audioSource.loop = true;
+
         float musicVolume = PlayerPrefs.GetFloat("VolumenMusic");
     
         if (PlayerPrefs.GetInt("MuteMusic") == 1)
