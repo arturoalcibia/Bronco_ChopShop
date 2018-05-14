@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 61207715291931850}
   - component: {fileID: 114426518204706740}
   - component: {fileID: 50824792662276966}
+  - component: {fileID: 95813094468767694}
   m_Layer: 0
   m_Name: goodHand
-  m_TagString: GoodHand
+  m_TagString: BadHand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1622506482071038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 247.87852, y: 141.61487, z: 0}
-  m_LocalScale: {x: 25, y: 25, z: 0}
+  m_LocalScale: {x: 75, y: 75, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -88,6 +89,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 6.41}
   m_EdgeRadius: 0
+--- !u!95 &95813094468767694
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1622506482071038}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114426518204706740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,6 +119,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  animFiles:
+  - {fileID: 9100000, guid: f6785f41ed6471745bc9c6834fcdeec2, type: 2}
+  - {fileID: 9100000, guid: ea49c1c657ec1014b97b7840246d01a9, type: 2}
+  - {fileID: 9100000, guid: d0f335c1b4b297a4593063b6cda3fc6e, type: 2}
+  - {fileID: 9100000, guid: 202af11c270674f4bb99629fcc21d112, type: 2}
 --- !u!212 &212808832844388052
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -135,7 +159,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9f46f2cb8985f5240a6e9a381d013fbf, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -143,5 +167,5 @@ SpriteRenderer:
   m_Size: {x: 5, y: 6.41}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0

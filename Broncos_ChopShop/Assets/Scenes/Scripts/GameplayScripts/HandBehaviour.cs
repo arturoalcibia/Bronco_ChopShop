@@ -12,7 +12,6 @@ public class HandBehaviour : MonoBehaviour {
 		int index = Random.Range(0, animFiles.Length);
 		animComponent = GetComponent<Animator>();
 		animComponent.runtimeAnimatorController = animFiles[index];
-		Debug.Log(animComponent.runtimeAnimatorController);
 	}
 	
 	// Update is called once per frame

@@ -12,6 +12,8 @@ public class RetryCtrl : MonoBehaviour {
     [SerializeField] int limitScores;
 
     public Transform canvas_transform;
+    public int y = 175;
+    public Font scoreFont;
     
     // Use this for initialization
     void Start () 
@@ -163,7 +165,7 @@ public class RetryCtrl : MonoBehaviour {
     {
        List<string> scoresUI = new List<string>(newScores);
 
-       int y = 175;
+       
 
        for(int i = 0; i < scoresUI.Count; i++)
        {
@@ -186,15 +188,17 @@ public class RetryCtrl : MonoBehaviour {
         DefaultControls.Resources uiResources = new DefaultControls.Resources();
         GameObject uiInputField = DefaultControls.CreateInputField(uiResources);
         uiInputField.transform.SetParent(canvas_transform, false);
-        uiInputField.transform.GetChild(0).GetComponent<Text>().font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-        uiInputField.transform.GetChild(0).GetComponent<Text>().text = "Jugador";
-        uiInputField.transform.GetChild(0).GetComponent<Text>().fontSize = 25;
-        uiInputField.transform.GetChild(1).GetComponent<Text>().fontSize = 25;
+        //uiInputField.transform.GetChild(0).GetComponent<Text>().font = (Font)Resources.GetBuiltinResource(typeof(Font), "BlackoakStd.ttf");
+        uiInputField.transform.GetChild(0).GetComponent<Text>().font = scoreFont;
+        uiInputField.transform.GetChild(1).GetComponent<Text>().font = scoreFont;
+        uiInputField.transform.GetChild(0).GetComponent<Text>().text = "___";
+        uiInputField.transform.GetChild(0).GetComponent<Text>().fontSize = 8;
+        uiInputField.transform.GetChild(1).GetComponent<Text>().fontSize = 15;
         InputField input = uiInputField.GetComponent<InputField>();
         input.characterLimit = 3;
 
         RectTransform trans = uiInputField.GetComponent<RectTransform>();
-        trans.anchoredPosition = new Vector2(x, y);
+        trans.anchoredPosition = new Vector2(x, y - 5);
         trans.sizeDelta = new Vector2 (150, 60);
 
         input.onValueChanged.AddListener(delegate {ValueChangeCheck(input); });
@@ -216,13 +220,13 @@ public class RetryCtrl : MonoBehaviour {
         DefaultControls.Resources uiResources = new DefaultControls.Resources();
         GameObject uiText = DefaultControls.CreateText(uiResources);
         uiText.transform.SetParent(canvas_transform, false);
-        uiText.transform.GetComponent<Text>().font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+        uiText.transform.GetComponent<Text>().font = scoreFont;
 
         RectTransform trans = uiText.GetComponent<RectTransform>();
         trans.anchoredPosition = new Vector2(x, y);
 
         Text text = uiText.GetComponent<Text>();
-        text.fontSize = 25;
+        text.fontSize = 15;
         text.text = text_to_print;
 
 
