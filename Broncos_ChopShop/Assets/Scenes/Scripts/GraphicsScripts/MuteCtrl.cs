@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class MuteCtrl : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    [SerializeField] AudioSource soundtrack;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -29,11 +31,13 @@ public class MuteCtrl : MonoBehaviour {
         if (mute)
         {
             AudioCtrl.volume = 0.0f;
+            soundtrack.volume = 0.0f;
         }
         else
         {
             float vol = PlayerPrefs.GetFloat("VolumenMusic");
             AudioCtrl.volume = vol;
+            soundtrack.volume = vol;
         }
     }
 }

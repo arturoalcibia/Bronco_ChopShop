@@ -13,9 +13,6 @@ public class EnableHand : MonoBehaviour {
     [SerializeField] GameObject hacha;
     int score = 0;
 
-    [SerializeField] Sprite LifeEnabled;
-    [SerializeField] Sprite LifeDisabled;
-
     [SerializeField] GameObject[] listPrefabs;
     int handCount = 0;
     GameObject handClone;
@@ -110,6 +107,7 @@ public class EnableHand : MonoBehaviour {
 			{
 				validPlay(i);
                 PlayAudioEffect(goodSound);
+                handsInside[i].GetComponent<SpriteRenderer>().enabled = false;
             }
 			else
 			{
@@ -125,14 +123,15 @@ public class EnableHand : MonoBehaviour {
 
     public void Slice()
     {
-        hacha.GetComponent<Animator>().SetBool("slice", true);
+        if (score <=140)
+            hacha.GetComponent<Animator>().SetBool("slice", true);
     	if (handsInside.Count > 0)
     	{	
     			int i = handsInside.Count - 1;
     			if (handsInside[i].tag != "GoodHand")
     			{
                     handsInside[i].tag = "UsedHand";
-    				oneLifeLess();
+                oneLifeLess();
                     PlayAudioEffect(badSound);
                 }
     			else
@@ -146,15 +145,21 @@ public class EnableHand : MonoBehaviour {
 
     void validPlay(int i)
     {
-    	//Dissapears Sprite Renderer and updates Score
-		//handsInside[i].GetComponent<SpriteRenderer>().enabled = false;
-		score += 10;
-		UI_Score.GetComponent<UnityEngine.UI.Text>().text = score.ToString();
+        //Dissapears Sprite Renderer and updates Score
+        //handsInside[i].GetComponent<SpriteRenderer>().enabled = false;
+        score += 10;
+
+        if (score >= 150)
+            handsInside[i].GetComponent<SpriteRenderer>().enabled = false;
+
+        UI_Score.GetComponent<UnityEngine.UI.Text>().text = score.ToString();
         handsInside[i].tag = "UsedHand";
+        
 
         if (currentVelocity < velocities)
         {
             currentVelocity = score / scoreSteps;
+            scoreSteps = scoreSteps + 10;
             PlayerPrefs.SetInt("CurrentVelocity", currentVelocity);
         }  
     }

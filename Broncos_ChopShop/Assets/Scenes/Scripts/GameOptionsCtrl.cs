@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class GameOptionsCtrl : MonoBehaviour {
 
     AudioSource audioSource;
-    [SerializeField] AudioClip soundtrack;
+    [SerializeField] AudioSource soundtrack;
     [SerializeField] AudioClip fxAudio;
 
     private void Awake()
@@ -30,7 +30,8 @@ public class GameOptionsCtrl : MonoBehaviour {
         if (PlayerPrefs.GetInt("MuteMusic") == 1)
             musicVolume = 0.0f;
 
-        audioSource.PlayOneShot(soundtrack, musicVolume);
+        //audioSource.PlayOneShot(soundtrack, musicVolume);
+        soundtrack.volume = musicVolume;
     }
 	
 	// Update is called once per frame

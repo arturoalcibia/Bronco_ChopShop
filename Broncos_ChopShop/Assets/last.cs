@@ -18,6 +18,11 @@ public class last : StateMachineBehaviour {
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) 
 	{
 		animator.SetBool("slice", false);
+        GameObject[] ToHide = GameObject.FindGameObjectsWithTag("UsedHand");
+        for (int i = 0; i < ToHide.Length; i++)
+        {
+            ToHide[i].GetComponent<SpriteRenderer>().enabled = false;
+        }
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

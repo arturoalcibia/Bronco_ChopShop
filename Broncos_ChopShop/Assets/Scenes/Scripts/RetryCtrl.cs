@@ -14,6 +14,8 @@ public class RetryCtrl : MonoBehaviour {
     public Transform canvas_transform;
     public int y = 175;
     public Font scoreFont;
+
+    [SerializeField] GameObject Ganador, Perdedor;
     
     // Use this for initialization
     void Start () 
@@ -185,6 +187,10 @@ public class RetryCtrl : MonoBehaviour {
     private void CreateTextField(int x, int y)
     
     {
+
+        Perdedor.SetActive(false);
+        Ganador.SetActive(true);
+
         DefaultControls.Resources uiResources = new DefaultControls.Resources();
         GameObject uiInputField = DefaultControls.CreateInputField(uiResources);
         uiInputField.transform.SetParent(canvas_transform, false);
