@@ -120,10 +120,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   animFiles:
-  - {fileID: 9100000, guid: 15f1962f0ffe43341bdaba0d27cd4349, type: 2}
-  - {fileID: 9100000, guid: 92a9adf0200b0cf4da62d79b43222a37, type: 2}
-  - {fileID: 9100000, guid: 7f9afd012b77fae49b1e552b2ae17e1c, type: 2}
-  - {fileID: 9100000, guid: 504c00cd7bce09d4981dcbe109b6bb48, type: 2}
+  - {fileID: 9100000, guid: 34ced2e865617ba4f80584a1864a5b2a, type: 2}
+  - {fileID: 9100000, guid: 6b3a72e2983d6b54aa592625e14e2790, type: 2}
+  - {fileID: 9100000, guid: 183fbed967f3bfd41a2b1d1fec5dadf0, type: 2}
+  - {fileID: 9100000, guid: eebb9ce3c63406b4ea2c01696f049312, type: 2}
 --- !u!212 &212634438333432532
 SpriteRenderer:
   m_ObjectHideFlags: 1
