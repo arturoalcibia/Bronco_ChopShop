@@ -28,11 +28,19 @@ public class EnableHand : MonoBehaviour {
     [SerializeField] int scoreSteps = 60;
     int currentVelocity = 0;
 
+    public ParticleSystem part_Blood;
+    public ParticleSystem part_Correct;
+
+
 
 
     private void Awake()
     {
         
+        part_Blood.Stop();
+        part_Correct.Stop();
+
+
         GameObject[] oldMusic = GameObject.FindGameObjectsWithTag("BgMusic");
         if (oldMusic.Length != 0)
             for (int i = 0; i < oldMusic.Length; i++)
@@ -123,14 +131,17 @@ public class EnableHand : MonoBehaviour {
 
     public void Pass()
     {
+
     	if (handsInside.Count > 0)
     	{	
+            part_Correct.Play();
+
     		int i = handsInside.Count - 1;
 			if (handsInside[i].tag == "BadHand")
 			{
 				validPlay(i);
                 PlayAudioEffect(goodSound);
-                handsInside[i].GetComponent<SpriteRenderer>().enabled = false;
+                //handsInside[i].GetComponent<SpriteRenderer>().enabled = false;
             }
 			else
 			{
@@ -156,6 +167,8 @@ public class EnableHand : MonoBehaviour {
 
     	if (handsInside.Count > 0)
     	{	
+                part_Blood.Play();
+
     			int i = handsInside.Count - 1;
     			if (handsInside[i].tag != "GoodHand")
     			{
@@ -213,10 +226,9 @@ public class EnableHand : MonoBehaviour {
 
     IEnumerator dissapearHand()
     {
+        //opt
         while(true)
         {
-            //Debug.Log("s");
-
             Animator animator = hacha.GetComponent<Animator>();
             
             if (animator.GetBool("slice") == true)
@@ -226,12 +238,14 @@ public class EnableHand : MonoBehaviour {
                 {
                     if (stateInfo.normalizedTime > 0.40f)
                     {
+                        
                         handsInside[0].GetComponent<SpriteRenderer>().enabled = false;
                         yield return new WaitForSeconds(0.001f);
                     }
                 }
             }
-                yield return new WaitForSeconds(0.001f);
+            
+            yield return new WaitForSeconds(0.001f);
                 
         }
     }
