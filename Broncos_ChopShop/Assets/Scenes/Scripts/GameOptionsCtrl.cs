@@ -9,14 +9,17 @@ using UnityEngine.SceneManagement;
 public class GameOptionsCtrl : MonoBehaviour {
 
     AudioSource audioSource;
-    [SerializeField] AudioSource soundtrack;
+    //[SerializeField] AudioClip soundtrack;
     [SerializeField] AudioClip fxAudio;
 
     private void Awake()
     {
+        /*
         GameObject[] oldMusic = GameObject.FindGameObjectsWithTag("BgMusic");
         if (oldMusic.Length != 0)
-            for (int i = 0; i < oldMusic.Length; i++) Destroy(oldMusic[i]);
+            for (int i = 0; i < oldMusic.Length; i++)
+                Destroy(oldMusic[i]);
+        */
     }
 
     // Use this for initialization
@@ -31,7 +34,7 @@ public class GameOptionsCtrl : MonoBehaviour {
             musicVolume = 0.0f;
 
         //audioSource.PlayOneShot(soundtrack, musicVolume);
-        soundtrack.volume = musicVolume;
+        //soundtrack.volume = musicVolume;
     }
 	
 	// Update is called once per frame

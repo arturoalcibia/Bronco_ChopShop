@@ -11,10 +11,13 @@ public class SettingsScene : MonoBehaviour {
         if (PlayerPrefs.GetInt("MuteMusic") == 1)
             musicVolume = 0.0f;
 
+        /*
         GameObject[] AudioObject = GameObject.FindGameObjectsWithTag("BgMusic");
         if (AudioObject.Length != 0)
             for (int i = 0; i < AudioObject.Length; i++)
                 AudioObject[i].GetComponent<AudioSource>().volume = musicVolume;
+        */
+
     }
 	
 	// Update is called once per frame

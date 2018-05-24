@@ -29,6 +29,18 @@ public class EnableHand : MonoBehaviour {
     int currentVelocity = 0;
 
 
+
+    private void Awake()
+    {
+        
+        GameObject[] oldMusic = GameObject.FindGameObjectsWithTag("BgMusic");
+        if (oldMusic.Length != 0)
+            for (int i = 0; i < oldMusic.Length; i++)
+                Destroy(oldMusic[i]);
+        
+    }
+
+
     // Use this for initialization
     void Start () 
 	{
@@ -202,8 +214,8 @@ public class EnableHand : MonoBehaviour {
     {
         while(true)
         {
-            Debug.Log("s");
-            
+            //Debug.Log("s");
+
             Animator animator = hacha.GetComponent<Animator>();
             
             if (animator.GetBool("slice") == true)
