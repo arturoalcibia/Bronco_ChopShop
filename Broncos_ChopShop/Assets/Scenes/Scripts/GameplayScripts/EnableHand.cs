@@ -47,9 +47,9 @@ public class EnableHand : MonoBehaviour {
         Animator hachaAnim = hacha.GetComponent<Animator>();
         
 
-		Lifes.Add(GameObject.Find("Canvas/UI_Life_1"));
-		Lifes.Add(GameObject.Find("Canvas/UI_Life_2"));
-		Lifes.Add(GameObject.Find("Canvas/UI_Life_3"));
+		Lifes.Add(GameObject.Find("Canvas/Canvas_lifes/UI_Life_1"));
+		Lifes.Add(GameObject.Find("Canvas/Canvas_lifes/UI_Life_2"));
+		Lifes.Add(GameObject.Find("Canvas/Canvas_lifes/UI_Life_3"));
 
         //Start spawning hands
         StartCoroutine(spawnHand());
@@ -160,7 +160,7 @@ public class EnableHand : MonoBehaviour {
     			if (handsInside[i].tag != "GoodHand")
     			{
                     handsInside[i].tag = "UsedHand";
-                oneLifeLess();
+                    oneLifeLess();
                     PlayAudioEffect(badSound);
                 }
     			else
@@ -197,10 +197,11 @@ public class EnableHand : MonoBehaviour {
     {
     	if (Lifes.Count > 1)
     	{
+            Debug.Log("life less");
     		//Changes sprite of life
 	    	int last = Lifes.Count - 1;
-			//Lifes[last].GetComponent<Image>().enabled = false;
-			//Lifes.Remove(Lifes[last]);
+			Lifes[last].GetComponent<Image>().enabled = false;
+			Lifes.Remove(Lifes[last]);
     	}
     	else
     	{

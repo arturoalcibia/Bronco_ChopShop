@@ -172,7 +172,7 @@ public class RetryCtrl : MonoBehaviour {
        for(int i = 0; i < scoresUI.Count; i++)
        {
             int no = 1 + i;
-            CreateText(-75, y, no.ToString());
+            CreateText(-155, y, no.ToString());
             CreateText(20, y, scoresUI[i].Split('|')[0]);
 
             if (indexPlayer != i)
